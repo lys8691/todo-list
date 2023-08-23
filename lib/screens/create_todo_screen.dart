@@ -13,13 +13,16 @@ class TodoScreen extends StatefulWidget {
 class _TodoScreenState extends State<TodoScreen> {
   @override
   Widget build(BuildContext context) {
+    // call provider for state management + actions
     final tp = Provider.of<TodoProvider>(context);
 
     return Scaffold(
+      // Appbar
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: const Text('Create Todo'),
       ),
+      // Body
       body: Container(
         padding: const EdgeInsets.only(
           left: 16,
@@ -29,6 +32,7 @@ class _TodoScreenState extends State<TodoScreen> {
         ),
         child: Column(
           children: [
+            // TextFormField for Title
             SizedBox(
               height: 50,
               width: double.infinity,
@@ -53,6 +57,7 @@ class _TodoScreenState extends State<TodoScreen> {
             const SizedBox(
               height: 24,
             ),
+            // TextFormField for Content
             SizedBox(
               height: 100,
               width: double.infinity,
@@ -90,6 +95,7 @@ class _TodoScreenState extends State<TodoScreen> {
             const SizedBox(
               height: 24,
             ),
+            // Calender to select date
             TableCalendar(
               firstDay: DateTime.utc(2020, 1, 1),
               lastDay: DateTime.utc(2100, 12, 31),
@@ -105,6 +111,7 @@ class _TodoScreenState extends State<TodoScreen> {
                   tp.onFormatChanged(format),
             ),
             const Spacer(),
+            // Button for Register or Update
             MaterialButton(
               color: Colors.black,
               minWidth: double.infinity,
@@ -118,6 +125,7 @@ class _TodoScreenState extends State<TodoScreen> {
             const SizedBox(
               height: 12,
             ),
+            // Button for delete
             Visibility(
               visible: tp.mode == Mode.update,
               child: MaterialButton(

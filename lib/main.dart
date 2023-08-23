@@ -7,6 +7,7 @@ import 'package:todo_list/screens/main_screen.dart';
 
 void main() {
   runApp(
+    // for the list of providers
     MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: TodoProvider()),
@@ -25,12 +26,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'To-do List',
+      // bright mode VS dart mode
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
+      // list of routes
       routes: {
         Routes.mainScreen: (context) => const MainScreen(),
         Routes.todoScreen: (context) => const TodoScreen(),
       },
+      // initial page
       initialRoute: Routes.mainScreen,
     );
   }

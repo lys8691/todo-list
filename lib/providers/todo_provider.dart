@@ -12,17 +12,19 @@ enum Mode {
 class TodoProvider with ChangeNotifier {
   Mode mode = Mode.create;
   int selectedIndex = -1;
+  // for calender
   DateTime selectedDate = DateTime.now();
   DateTime focusedDate = DateTime.now();
   CalendarFormat format = CalendarFormat.month;
+  // for text input
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
-
+  // for instance and list
   Todo tempTodo = Todo();
   List<Todo> todos = [];
 
   onPressCreateButton(BuildContext context) {
-    tempTodo = Todo();
+    tempTodo = Todo(); // CAUTION : Deep copy
     mode = Mode.create;
     selectedDate = DateTime.now();
     focusedDate = DateTime.now();
