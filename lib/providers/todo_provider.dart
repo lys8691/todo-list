@@ -62,14 +62,35 @@ class TodoProvider with ChangeNotifier {
   }
 
   onPressRegisterButton(BuildContext context) {
+    // Organize tempTodo data
     tempTodo.title = titleController.text;
     tempTodo.content = contentController.text;
     tempTodo.selectedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
 
+    // Validity check
+    if (tempTodo.title == "" ||
+        tempTodo.content == "" ||
+        tempTodo.selectedDate == "") {
+      // Error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Todo의 내용을 입력해주세요',
+            textAlign: TextAlign.center,
+          ),
+          duration: Duration(seconds: 1),
+        ),
+      );
+      return;
+    }
+
     debugPrint(
         '${tempTodo.title}, ${tempTodo.content}, ${tempTodo.selectedDate}');
 
+    // Add or Update to the list
     mode == Mode.create ? todos.add(tempTodo) : todos[selectedIndex] = tempTodo;
+
+    // Clear used controllers
     titleController.clear();
     contentController.clear();
     notifyListeners();
